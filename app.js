@@ -76,7 +76,7 @@ passport.deserializeUser(User.deserializeUser())
 
 
 app.get('/',(req,res)=>{
-    res.send('welcome to AdventureAbode')
+    res.redirect('/listings')
 })
 
 app.use((req,res,next)=>{
