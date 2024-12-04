@@ -1,0 +1,52 @@
+<% layout("/layout/boilerplat")%>
+
+<body>
+    <h2>Edit a Post</h2>
+
+    <form class="needs-validation" method="POST" action="/listings/<%= Listing._id %>?_method=PUT" enctype="multipart/form-data" novalidate>
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" id="title" name="Listing[title]" value="<%= Listing.title %>" class="form-control" required>
+        <div class="invalid-feedback">Title is required.</div>
+      </div>
+    
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea id="description" name="Listing[description]" rows="4" class="form-control" placeholder="<%= Listing.description %>" required></textarea>
+        <div class="invalid-feedback">Description is required.</div>
+      </div>
+    
+      <div class="mb-3">
+        <label for="price" class="form-label">Price</label>
+        <input type="number" id="price" name="Listing[price]" value="<%= Listing.price %>" class="form-control" min="1" required>
+        <div class="invalid-feedback">Price must be greater than 0.</div>
+      </div>
+    
+      <div class="mb-3">
+        <label for="country" class="form-label">Country</label>
+        <input type="text" id="country" name="Listing[country]" value="<%= Listing.country %>" class="form-control" required>
+        <div class="invalid-feedback">Country is required.</div>
+      </div>
+    
+      <div class="mb-3">
+        <label for="location" class="form-label">Location</label>
+        <input type="text" id="location" name="Listing[location]" value="<%= Listing.location %>" class="form-control" required>
+        <div class="invalid-feedback">Location is required.</div>
+      </div>
+
+      <div class="mb-3">
+        <h6><i>Original Image</i></h6>
+        <img src="<%= Listing.image.url %>" alt="" class="img-fluid w-25 h-25">
+      </div>
+      
+    
+      <div class="mb-3">
+        <label for="image" class="form-label">Image URL</label>
+        <input type="file" id="image" name="Listing[image]" value="<%= Listing.image %>" class="form-control" required>
+      </div>
+    
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary">Edit Now</button>
+      </div>
+    </form>
+</body>

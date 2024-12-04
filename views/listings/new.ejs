@@ -1,0 +1,60 @@
+<% layout("/layout/boilerplat")%>
+
+<body>
+  <div class="container mt-5">
+    <form class="needs-validation" action="/listings" method="POST" enctype="multipart/form-data" novalidate>
+      <h2 class="text-center mb-4">Create a Post</h2>
+      
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" id="title" name="Listing[title]" class="form-control" placeholder="Enter title" required>
+        <div class="invalid-feedback">Title is required.</div>
+        <div class="valid-feedback">Looks good!</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea id="description" name="Listing[description]" class="form-control" rows="4" placeholder="Add any special requests or comments"></textarea>
+        <div class="invalid-feedback">Description is required.</div>
+        <div class="valid-feedback">Looks good!</div>
+
+      </div>
+
+      <div class="mb-3">
+        <label for="price" class="form-label">Price</label>
+        <input type="number" id="price" name="Listing[price]" class="form-control" placeholder="Enter price" min="1" required>
+        <!-- <div class="invalid-feedback">Price must be greater than 0.</div>
+        <div class="valid-feedback">Looks good!</div> -->
+
+      </div>
+
+      <div class="mb-3">
+        <label for="country" class="form-label">Country</label>
+        <input type="text" id="country" name="Listing[country]" class="form-control" placeholder="Enter country" required>
+        <div class="invalid-feedback">Country is required.</div>
+        <div class="valid-feedback">Looks good!</div>
+
+      </div>
+
+      <div class="mb-3">
+        <label for="location" class="form-label">Location</label>
+        <input type="text" id="location" name="Listing[location]" class="form-control" placeholder="Enter location" required>
+        <div class="invalid-feedback">Location is required.</div>
+        <div class="valid-feedback">Looks good!</div>
+
+      </div>
+
+      <div class="mb-3">
+        <label for="image" class="form-label">Image URL</label>
+        <input type="file" id="image" name="Listing[image]" class="form-control" placeholder="image" required>
+        <div class="invalid-feedback">A valid image URL is required.</div>
+        <div class="valid-feedback">Looks good!</div>
+
+      </div>
+
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary">Post Now</button>
+      </div>
+    </form>
+  </div>
+</body>

@@ -1,0 +1,98 @@
+<% layout("/layout/boilerplat")%>
+
+<body>
+    <div class="listing-container">
+        <!-- Image section -->
+        <img src="<%= Listing.image.url %>" alt="<%= Listing.title %>" />
+
+        <p class="owner-username">@<%= Listing.owner.username %></p>
+      
+        <h3><%= Listing.title %></h3>
+        <p><%= Listing.description %></p>
+        
+        <p class="price">
+          &#8377; 
+          <%= Listing.price ? Listing.price.toLocaleString("en-IN") : "Price not available" %>
+        </p>
+        
+        <p class="location"><strong>Location:</strong> <%= Listing.location %></p>
+        <p class="country"><strong>Country:</strong> <%= Listing.country %></p>
+        
+        <%if(currUser&& currUser._id.equals(Listing.owner._id)){%>
+          <div class="buttons">
+            <form action="/listings/<%=Listing._id %>/edit">
+              <button class="edit">Edit</button>
+            </form>
+            <form method="post" action="/listings/<%=Listing._id %>?_method=DELETE" style="display: inline;">
+              <button class="delete">Delete</button>
+            </form>
+       <% }%>
+        </div>
+      </div>
+
+      <% if(currUser) { %>
+        <div class="review-form-container">
+          <h3 style="padding: 12px;">Review</h3>
+          <form class="needs-validation" action="/listings/<%= Listing._id %>/reviews" method="POST" class="review-form" novalidate>
+            <label for="rating">Rating:</label>
+            <div class="star-rating">
+              <% for (let i = 1; i <= 5; i++) { %>
+                <span 
+                  class="star" 
+                  data-value="<%= i %>" 
+                  onclick="selectStar(<%= i %>)"
+                  onmouseover="hoverStar(<%= i %>)" 
+                  onmouseout="resetStar()">
+                  &#9733;
+                </span>
+              <% } %>
+              <input type="hidden" id="rating" name="review[rating]" required />
+            </div>
+            <textarea 
+              id="comment" 
+              name="review[comment]" 
+              rows="2" 
+              placeholder="Add a comment..." 
+              required></textarea>
+            <button type="submit" class="submit-review">Submit</button>
+          </form>
+        </div>
+      <% } %>
+      
+      
+      <br><hr>
+      <div class="reviews">
+        <% for (let review of Listing.reviews) { %>
+          <div class="review-card">
+            <span class="review-username">@<%= review.author.username %></span>
+      
+            <div class="review-header">
+              <span class="review-rating">
+                <% for (let i = 1; i <= 5; i++) { %>
+                  <% if (i <= review.rating) { %>
+                    <i class="fa fa-star checked"></i>
+                  <% } else { %>
+                    <i class="fa fa-star"></i>
+                  <% } %>
+                <% } %>
+              </span>
+            </div>
+      
+            <div class="review-body">
+              <p class="review-comment"><%= review.comment %></p>
+            </div>
+      
+            <!-- Delete button for the review -->
+            <form 
+              class="deleteform"
+              method="POST" 
+              action="/listings/<%= Listing._id %>/reviews/<%= review._id %>?_method=DELETE" 
+              style="display: inline;"
+            >
+              <button class="delete-review"><i class="fa-solid fa-trash-can"></i></button>
+            </form>
+          </div>
+        <% } %>
+      </div>
+      
+</body>

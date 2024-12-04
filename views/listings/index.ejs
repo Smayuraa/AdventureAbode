@@ -1,0 +1,35 @@
+<% layout("/layout/boilerplat")%>
+<body>
+    <!-- <form action="/listings/new">
+        <button>Create Post</button>
+    </form> -->
+    <%= success %>
+    <ul>
+        <% for (let listings of allListings) { %>
+          <li class="listing-card">
+            <a href="/listings/<%= listings._id %>" class="card-link">
+              <div class="card">
+                <!-- Image with error handling -->
+                <img src="<%= listings.image.url %>" 
+                     alt="<%= listings.title %>" 
+                     class="card-image" 
+                     onError="this.onerror=null;this.src='default-image.jpg';" />
+                <div class="card-details">
+                  <h3 class="card-title"><%= listings.title %></h3>
+                  <p class="card-price">$<%= listings.price %></p>
+                </div>
+              </div>
+            </a>
+          </li>
+        <% } %>
+      </ul>
+
+      
+      
+      
+
+    
+    
+</body>
+
+
